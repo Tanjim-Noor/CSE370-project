@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from database import load_movies
 from forms import SignupForm, LoginForm #import signupform func from forms.py
 from flask_wtf.csrf import CSRFProtect
