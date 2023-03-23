@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand text-uppercase" href="{{ url_for('home') }}" style="font-family: Arial, sans-serif; font-weight: 800; font-size: 40px;">
       <span style="color: #e50914;">BUY</span><span style="color: #f5c518;">YA'LL</span><span style="color: #e50914;">TIX</span>
@@ -9,14 +9,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('shows') }}" style="font-weight: 600;">Shows</a>
+          <a class="nav-link" href="{{ url_for('shows') }}" style="font-weight: 600; color: #f5c518;">Movies</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('sign_up') }}" style="font-weight: 600;">Sign Up</a>
+          <a class="nav-link" href="{{ url_for('sign_up') }}" style="font-weight: 600; color: #f5c518;">Sign Up</a>
+        </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('log_in') }}" style="font-weight: 600;">Login</a>
+          <a class="nav-link" href="{{ url_for('log_in') }}" style="font-weight: 600; color: #f5c518;">Login</a>
         </li>
       </ul>
     </div>
   </div>
-</nav>
+</nav> 
