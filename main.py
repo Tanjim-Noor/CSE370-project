@@ -1,6 +1,6 @@
 import os
-from flask import Flask, render_template, redirect, url_for, flash
-from database import load_movies
+from flask import Flask, render_template, redirect, url_for
+from database import load_movies, insert_user_info, get_user_by_email
 from forms import SignupForm, LoginForm #import signupform func from forms.py
 from flask_wtf.csrf import CSRFProtect
 
@@ -16,22 +16,29 @@ def home():
   return render_template('home.html')
 
 
-@app.route('/sign_up', methods=['GET', 'POST'])  #signup
+@app.route('/sign_up', methods=['GET', 'POST'])
 def sign_up():
-  name = None
-  form = SignupForm()
+    name = None
+    form = SignupForm()
 
-  if form.validate_on_submit():
-    name = form.username.data
-    form.username.data = ''
-    print(f'Signup Succesful for {name} ')  #doesn't work idk why
-    return redirect(url_for('signup_success', name=name))
+    if form.validate_on_submit():
+        name = form.username.data
+        email = form.email.data
+        password = form.pass1.data
+        form.username.data = ''
+        form.email.data = ''
+        form.pass1.data = ''
+        form.pass2.data = ''
+        if insert_user_info(name, email, password):
+            print(f'Signup Succesful for {name} ')
+            return redirect(url_for('signup_success', name=name))
+        else:
+            #flash('Username or email already exists!', 'danger')
+            print("not successful")
+    else:
+        print(form.errors)
 
-  else:
-    print(form.errors)  # print the validation errors
-    print("not successful")
-
-  return render_template('signup.html', name=name, form=form)
+    return render_template('signup.html', name=name, form=form)
 
 
 @app.route('/signup/success/<string:name>')
@@ -43,9 +50,17 @@ def signup_success(name):
 def log_in():
     form = LoginForm()
     if form.validate_on_submit():
-        # handle login logic here
-        flash('You have been logged in successfully!', 'success')
-        return redirect(url_for('home'))
+        email = form.email.data
+        password = form.password.data
+        user = get_user_by_email(email)
+        
+        if user and user['password'] == password:
+            print("login successfull")
+          
+            return redirect(url_for('home'))
+        else:
+            print("Invalid email or password!")
+            
     return render_template('login.html', title='Log In', form=form)
 
 @app.route('/shows')
