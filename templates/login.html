@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Sign Up{% endblock %}
+{% block title %}Log In{% endblock %}
 
 {% block content %}
 
@@ -8,17 +8,11 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
-          <h1 class="text-center">Sign Up</h1>
+          <h1 class="text-center">Log In</h1>
         </div>
         <div class="card-body">
           <form method='POST'>
             {{ form.hidden_tag() }}
-            {{ form.csrf_token }}
-
-            <div class="form-group">
-              {{ form.username.label(class="form-label") }}
-              {{ form.username(class="form-control") }}
-            </div>
 
             <div class="form-group">
               {{ form.email.label(class="form-label") }}
@@ -26,17 +20,16 @@
             </div>
 
             <div class="form-group">
-              {{ form.pass1.label(class="form-label") }}
-              {{ form.pass1(class="form-control") }}
+              {{ form.password.label(class="form-label") }}
+              {{ form.password(class="form-control") }}
             </div>
 
             <div class="form-group">
-              {{ form.pass2.label(class="form-label") }}
-              {{ form.pass2(class="form-control") }}
+              {{ form.remember_me(class="form-check-input me-1") }}
+              {{ form.remember_me.label(class="form-check-label") }}
             </div>
 
             <div class="form-group">
-              {{ form.csrf_token }}
               {{ form.submit(class="btn btn-primary mt-3") }}
             </div>
 
