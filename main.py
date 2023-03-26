@@ -7,15 +7,23 @@ from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 
-#app.config['SECRET_KEY'] = os.environ['secret_key']  #required for form validation
+record = ""
+session = {"loggedin": False, "username" : ''}
+
+logged_in = False
+
+app.secret_key = "skeret ki"  #required for form validation
 app.config['WTF_CSRF_ENABLED'] = False
 csrf = CSRFProtect(app)
 
 
 @app.route('/')  #home
 def home():
+  global session
+  global logged_in
   card_data = load_movies()
-  return render_template('home.html', data=card_data)
+  
+  return render_template('home.html', username = session['username'], logged_in = logged_in, data=card_data)
 
 
 @app.route('/sign_up', methods=['GET', 'POST'])
@@ -32,7 +40,7 @@ def sign_up():
     form.pass1.data = ''
     form.pass2.data = ''
     if insert_user_info(name, email, password):
-      print(f'Signup Succesful for {name} ')
+      print(f'Signup Succesful for {name}')
       return redirect(url_for('signup_success', name=name))
     else:
       #flash('Username or email already exists!', 'danger')
@@ -51,32 +59,51 @@ def signup_success(name):
 
 @app.route('/log_in', methods=['GET', 'POST'])
 def log_in():
+  global logged_in
+  global session
+  global record
+  
   form = LoginForm()
   if form.validate_on_submit():
     email = form.email.data
     password = form.password.data
     user = get_user_by_email(email)
 
+    record = user
+
     if user and user['password'] == password:
+      
+      session["loggedin"] = True
+      session["username"] = record['username']
+      logged_in = True
       print("login successfull")
 
+      #return redirect(url_for('user-profile' , username = session['username']))
       return redirect(url_for('home'))
     else:
       print("Invalid email or password!")
 
   return render_template('login.html', title='Log In', form=form)
 
+@app.route('/user-profile')
+def user_profile():
+  return render_template('user-profile.html', username = session['username'])
+
+@app.route('/log_out')
+def log_out():
+  global logged_in
+  global session
+  global record
+  session.pop('loggedin', None)
+  session.pop('username', None)
+  logged_in = False
+  return redirect(url_for('home'))
 
 @app.route('/shows')
 def shows():
   # Fetch all movies from the database
   movies_list = load_movies()
   return render_template('shows.html', movies=movies_list)
-
-
-@app.route('/user-profile')
-def user_profile():
-  return render_template('user-profile.html')
 
 
 if __name__ == '__main__':
