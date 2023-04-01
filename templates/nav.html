@@ -13,16 +13,18 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ url_for('sign_up') }}" style="font-weight: 600; color: #f5c518;">Sign Up</a>
+          
         </li>
-        {% if logged_in %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('log_out') }}" style="font-weight: 600; color: #f5c518;">Logout</a>
-        </li>   
-        {% else %}
-        <li class="nav-item">
+        {% if username %}
+          <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('log_out') }}" style="font-weight: 600; color: #f5c518;">Log out</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
           <a class="nav-link" href="{{ url_for('log_in') }}" style="font-weight: 600; color: #f5c518;">Login</a>
+          </li>
         {% endif %}
-        </li>
+        
       </ul>
     </div>
   </div>

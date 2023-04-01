@@ -4,11 +4,6 @@
 
 {% block content %}
 
-{% if logged_in %}
-  <div class="alert alert-success" role="alert">
-    Hello {{username}}
-  </div>
-{% endif %}
 
 <div class='container'>
   {%include 'cards.html'%}
@@ -16,11 +11,15 @@
 
 <div class="jumbotron">
     <h1 class="display-4">Welcome to BUY YA'LL TIX</h1>
+    <h3 class="display-4">{{username}}</h3>
     <p class="lead">We provide you the best ticket purchasing experience. Find your favorite events and get your tickets now!</p>
     <hr class="my-4">
     <p>Take a look at our upcoming shows to see what events are coming to town.</p>
     <a class="btn btn-primary btn-lg" href="{{ url_for('shows') }}" role="button">View Shows</a>
   </div> 
+
+          
+
 
 
   
