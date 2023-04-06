@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Checkout</title>
+</head>
+<body>
+	<h1>Checkout</h1>
+	<img src="https://i.ibb.co/Czh3B2G/MV5-BZTkw-Zj-U3-MTct-MGEx-Mi00-Yj-U5-LTgw-MDMt-OWNk-ZDRl-Zj-Q4-Nm-Zh-Xk-Ey-Xk-Fqc-Gde-QXVy-Nj-Aw-NDU.jpg" alt="Product Image">
+	<h2>Product Name</h2>
+	<p>Product Description</p>
+	<p>Price: $29.48</p>
+	<form action="/process-payment" method="POST">
+		<script
+			src="https://checkout.stripe.com/checkout.js"
+			class="stripe-button"
+			data-key="sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+			data-amount="2948"
+			data-name="My Product"
+			data-description="Product Description"
+			data-image="https://i.ibb.co/Czh3B2G/MV5-BZTkw-Zj-U3-MTct-MGEx-Mi00-Yj-U5-LTgw-MDMt-OWNk-ZDRl-Zj-Q4-Nm-Zh-Xk-Ey-Xk-Fqc-Gde-QXVy-Nj-Aw-NDU.jpg"
+			data-currency="usd"
+			data-email="customer@example.com"
+			data-locale="auto">
+		</script>
+	</form>
+</body>
+</html>

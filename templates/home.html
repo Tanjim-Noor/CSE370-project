@@ -11,16 +11,17 @@
 
 <div class="jumbotron">
     <h1 class="display-4">Welcome to BUY YA'LL TIX</h1>
-    <h3 class="display-4">{{username}}</h3>
+    {% if username %}
+        <h3 class="display-4">{{username}}</h3>
+    {% endif %}
     <p class="lead">We provide you the best ticket purchasing experience. Find your favorite events and get your tickets now!</p>
     <hr class="my-4">
     <p>Take a look at our upcoming shows to see what events are coming to town.</p>
     <a class="btn btn-primary btn-lg" href="{{ url_for('shows') }}" role="button">View Shows</a>
+  <a class="btn btn-primary btn-lg" href="{{ url_for('checkout_2') }}" role="button">Payment Testing 2</a>
   </div> 
 
           
-
-
 
   
 {% endblock %}

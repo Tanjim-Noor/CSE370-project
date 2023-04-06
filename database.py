@@ -50,9 +50,11 @@ def get_user_by_email(email):
                           {"email": email})
 
     result_list = [dict(zip(result.keys(), row)) for row in result.fetchall()]
-    f_result = result_list[0]
-    #print("DICTIONARY RESULT @#@@@##@##@##@#", result_list)
-
+    try:
+        f_result = result_list[0]
+        #print("DICTIONARY RESULT @#@@@##@##@##@#", result_list)
+    except:
+      return False
     if len(result_list) > 0 :
       return f_result
 
