@@ -59,8 +59,6 @@ def create_checkout_session():
     except stripe.error.InvalidRequestError as e:
         print(e)
 
-    print("Failed to create file object in Stripe.")
-
     
     # Create a Checkout session using the Price object
     try:
